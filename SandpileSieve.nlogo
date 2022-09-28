@@ -95,10 +95,25 @@ end
 
 ;; patch procedure; the colors are like a stoplight
 to recolor
-  set pcolor black
-  set pcolor scale-color base-color n 0 4
+  set pcolor white
 
-  if border = 1 [set pcolor scale-color red comp-speed 0 max-comp-speed]
+  if showing = "grains"
+  [
+    ;;set pcolor scale-color base-color n 0 4
+    set pcolor scale-color blue n 0 4
+  ]
+
+  if showing = "comp-power"
+  [
+    set pcolor scale-color green comp-speed 1 (max-comp-speed + 3)
+  ]
+
+  if showing = "borders"
+  [
+    set pcolor scale-color red (border * 2) 1 3
+  ]
+
+  ;if border = 1 [set pcolor scale-color red comp-speed 0 max-comp-speed]
 end
 
 to go
@@ -516,7 +531,7 @@ size-grains
 size-grains
 0
 3072
-1024.0
+3072.0
 1
 1
 NIL
@@ -553,7 +568,7 @@ max-comp-speed
 max-comp-speed
 1
 100
-3.0
+5.0
 1
 1
 NIL
@@ -631,7 +646,7 @@ SWITCH
 628
 workload?
 workload?
-0
+1
 1
 -1000
 
@@ -688,6 +703,16 @@ false
 "" ""
 PENS
 "default" 1.0 0 -5298144 true "" "plot (max [comp-speed] of patches) "
+
+CHOOSER
+410
+445
+525
+490
+showing
+showing
+"grains" "comp-power" "borders"
+2
 
 @#$#@#$#@
 ## WHAT IS IT?
